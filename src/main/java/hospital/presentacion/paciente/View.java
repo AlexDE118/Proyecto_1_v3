@@ -26,10 +26,13 @@ public class View implements PropertyChangeListener {
     private JTextField telefono_textField;
 
     public JPanel getPacientesJPanel() {
+        telefono_textField.setText("");
         return pacientesJPanel;
     }
 
     public View(){
+
+
         guardarButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {

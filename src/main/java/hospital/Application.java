@@ -43,6 +43,9 @@ public class Application {
         MedicamentosController medicamentosController = new MedicamentosController(medicamentosView,medicamentosModel);
 
         //PRESCRIPCION
+        hospital.presentacion.prescripcion.View prescripcionView = new hospital.presentacion.prescripcion.View();
+        hospital.presentacion.prescripcion.Model prescripcionModel = new hospital.presentacion.prescripcion.Model();
+        hospital.presentacion.prescripcion.Controller prescripcionController = new hospital.presentacion.prescripcion.Controller(prescripcionView,prescripcionModel);
 
         // ----------- FRAME ----------- //
         JFrame window = new JFrame();
@@ -55,7 +58,10 @@ public class Application {
         tabbedPane.addTab("Medicamentos",medicamentosView.getPanelMedicamentos());
         tabbedPane.addTab("Farmaceutas",farmaceutaView.getFarmaceutaPanel());
         tabbedPane.addTab("Pacientes", pacienteView.getPacientesJPanel());
-
+        tabbedPane.addTab("Prescripcion", prescripcionView.getPrescripcionJPanel());
+        tabbedPane.addTab("Dashboard",null);
+        tabbedPane.addTab("Historico",null);
+        tabbedPane.addTab("Acerca de", null);
         // -----
         controllerDoctor.loadDoctors();
         medicamentosController.loadMedicamentos();

@@ -186,12 +186,21 @@ public class Service {
         if(result != null){
             return result;
         } else   {
-            throw new Exception("Medicamento existente");
+            throw new Exception("Medicamento no existente");
         }
     }
 
     public List<Medicamento> loadListaMedicamentos(){
         return listas.getMedicamentos();
+    }
+
+    public List<Medicamento> searchMedicamento(Medicamento medicamento) {
+        return listas.getMedicamentos().stream()
+                .filter(m -> (medicamento.getID() == null || medicamento.getID().isEmpty() ||
+                        m.getID().toLowerCase().contains(medicamento.getID().toLowerCase())) &&
+                        (medicamento.getID() == null || medicamento.getID().isEmpty() ||
+                                m.getID().equalsIgnoreCase(medicamento.getID())))
+                .collect(Collectors.toList());
     }
     //========================== Receta ==========================//
 
@@ -203,11 +212,15 @@ public class Service {
         return listas.getRecetas();
     }
 
+    public void removeReceta(Receta receta) {
+        listas.getRecetas().remove(receta);
+    }
+
     //========================== Prescripcion ==========================//
 
     public void createPrescripcion(Prescripcion prescripcion) throws Exception{
         Prescripcion result = listas.getPrescripciones().stream()
-                .filter(x -> x.getReceta().equals(prescripcion.getReceta())).findFirst().orElse(null);
+                .filter(x -> x.getPaciente().getId().equals(prescripcion.getPaciente().getId())).findFirst().orElse(null);
         if(result == null){
             listas.getPrescripciones().add(prescripcion);
         } else {
@@ -217,16 +230,27 @@ public class Service {
 
     public Prescripcion readPrescripcion(Prescripcion prescripcion) throws Exception{
         Prescripcion result = listas.getPrescripciones().stream()
-                .filter(x -> x.getReceta().equals(prescripcion.getReceta())).findFirst().orElse(null);
+                .filter(x -> x.getPaciente().getId().equals(prescripcion.getPaciente().getId())).findFirst().orElse(null);
         if(result != null){
             return result;
         } else {
-            throw new Exception("Prescripcion existente");
+            throw new Exception("Prescripcion no existente");
         }
     }
 
     public List<Prescripcion> loadListaPrescripciones(){
         return listas.getPrescripciones();
+    }
+
+    public void updatePrescripcion(Prescripcion prescripcion) throws Exception {
+        Prescripcion result = listas.getPrescripciones().stream()
+                .filter(x -> x.getPaciente().getId().equals(prescripcion.getPaciente().getId())).findFirst().orElse(null);
+        if(result != null){
+            listas.getPrescripciones().remove(result);
+            listas.getPrescripciones().add(prescripcion);
+        } else {
+            throw new Exception("Prescripcion no existente");
+        }
     }
 
     //======================= END ======================//
