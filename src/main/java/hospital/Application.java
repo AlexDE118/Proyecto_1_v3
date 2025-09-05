@@ -5,7 +5,7 @@ import hospital.presentacion.doctor.Model;
 import hospital.presentacion.doctor.View;
 import hospital.presentacion.medicamentos.MedicamentosController;
 import hospital.presentacion.medicamentos.MedicamentosModel;
-import hospital.presentacion.medicamentos.ViewMedicamentos;
+import hospital.presentacion.medicamentos.View3;
 
 import javax.swing.*;
 
@@ -39,7 +39,7 @@ public class Application {
         hospital.presentacion.paciente.Controller pacienteController = new hospital.presentacion.paciente.Controller(pacienteView, pacienteModel);
         //Medicamentos
         MedicamentosModel medicamentosModel = new MedicamentosModel();
-        ViewMedicamentos medicamentosView = new ViewMedicamentos();
+        View3 medicamentosView = new View3();
         MedicamentosController medicamentosController = new MedicamentosController(medicamentosView,medicamentosModel);
 
         //PRESCRIPCION
@@ -55,7 +55,7 @@ public class Application {
         window.setTitle("Proyecto_1");
         window.setContentPane(tabbedPane);
         tabbedPane.addTab("Doctores", doctorView.getMedicos_JPanel());
-        tabbedPane.addTab("Medicamentos",medicamentosView.getPanelMedicamentos());
+        tabbedPane.addTab("Medicamentos",medicamentosView.getMedicamentos_JPanel());
         tabbedPane.addTab("Farmaceutas",farmaceutaView.getFarmaceutaPanel());
         tabbedPane.addTab("Pacientes", pacienteView.getPacientesJPanel());
         tabbedPane.addTab("Prescripcion", prescripcionView.getPrescripcionJPanel());

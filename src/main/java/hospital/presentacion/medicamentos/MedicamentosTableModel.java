@@ -10,14 +10,14 @@ public class MedicamentosTableModel extends AbstractTableModel<Medicamento> impl
         super(column, rows);
     }
 
-    public static final int ID = 0;
+    public static final int CODIGO = 0;
     public static final int NOMBRE = 1;
     public static final int PRESENTACION = 2;
 
     @Override
     protected void initColNames(){
         columnName = new String[3];
-        columnName[ID] = "ID";
+        columnName[CODIGO] = "ID";
         columnName[NOMBRE] = "Nombre";
         columnName[PRESENTACION] = "PRESENTACION";
     }
@@ -25,7 +25,7 @@ public class MedicamentosTableModel extends AbstractTableModel<Medicamento> impl
     @Override
     protected Object getPropertyAt(Medicamento medicamento, int col) {
         switch(column[col]){
-            case ID: return medicamento.getID();
+            case CODIGO: return medicamento.getCodigo();
             case NOMBRE: return medicamento.getNombre();
             case PRESENTACION: return medicamento.getPresentacion();
             default: return null;

@@ -25,9 +25,8 @@ public class Listas {
         pacientes.add(new Paciente("CCC","PAC-333","333-444"));
 
         this.medicamentos = new ArrayList<Medicamento>();
-        medicamentos.add(new Medicamento("MED-111","AAA",1.1));
-        medicamentos.add(new Medicamento("MED-222","BBB",1.2));
-        medicamentos.add(new Medicamento("MED-333","CCC",1.3));
+        medicamentos.add(new Medicamento("M-001", "Acetaminofén", "Analgésico usado para aliviar el dolor leve."));
+        medicamentos.add(new Medicamento("M-002", "Amoxilina", "Antibiótico usado para ifecciones bacterianas en vias respiratorias, urinarias y otros tejidos.."));
 
         this.farmaceutas = new ArrayList<Farmaceuta>();
         farmaceutas.add(new Farmaceuta("AAA","FAR-111","111-222"));
@@ -35,9 +34,9 @@ public class Listas {
         farmaceutas.add(new Farmaceuta("CCC","FAR-333","333-444"));
 
         this.recetas = new ArrayList<>();
-        recetas.add(new Receta(new Medicamento("REC-111","AAA",1), 1,11,"AA BB CC"));
-        recetas.add(new Receta(new Medicamento("REC-222","BBB",2), 1,11,"DD EE FF"));
-        recetas.add(new Receta(new Medicamento("REC-222","CCC",3), 1,11,"GG HH II"));
+        recetas.add(new Receta(new Medicamento("REC-111","AAA","1"), 1,11,"AA BB CC"));
+        recetas.add(new Receta(new Medicamento("REC-222","BBB","2"), 1,11,"DD EE FF"));
+        recetas.add(new Receta(new Medicamento("REC-222","CCC","3"), 1,11,"GG HH II"));
 
         this.prescripciones = new ArrayList<Prescripcion>();
     }

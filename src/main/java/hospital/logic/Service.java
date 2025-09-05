@@ -172,7 +172,7 @@ public class Service {
 
     public void createMedicamentos(Medicamento medicamento) throws Exception{
         Medicamento result = listas.getMedicamentos().stream()
-                .filter(x -> x.getID().equals(medicamento.getID())).findFirst().orElse(null);
+                .filter(x -> x.getCodigo().equals(medicamento.getCodigo())).findFirst().orElse(null);
         if(result == null){
             listas.getMedicamentos().add(medicamento);
         } else  {
@@ -182,7 +182,7 @@ public class Service {
 
     public Medicamento readMedicamentos(Medicamento medicamento) throws Exception{
         Medicamento result = listas.getMedicamentos().stream()
-                .filter(x -> x.getID().equals(medicamento.getID())).findFirst().orElse(null);
+                .filter(x -> x.getCodigo().equals(medicamento.getCodigo())).findFirst().orElse(null);
         if(result != null){
             return result;
         } else   {
@@ -196,10 +196,10 @@ public class Service {
 
     public List<Medicamento> searchMedicamento(Medicamento medicamento) {
         return listas.getMedicamentos().stream()
-                .filter(m -> (medicamento.getID() == null || medicamento.getID().isEmpty() ||
-                        m.getID().toLowerCase().contains(medicamento.getID().toLowerCase())) &&
-                        (medicamento.getID() == null || medicamento.getID().isEmpty() ||
-                                m.getID().equalsIgnoreCase(medicamento.getID())))
+                .filter(m -> (medicamento.getCodigo() == null || medicamento.getCodigo().isEmpty() ||
+                        m.getCodigo().toLowerCase().contains(medicamento.getCodigo().toLowerCase())) &&
+                        (medicamento.getCodigo() == null || medicamento.getCodigo().isEmpty() ||
+                                m.getCodigo().equalsIgnoreCase(medicamento.getCodigo())))
                 .collect(Collectors.toList());
     }
     //========================== Receta ==========================//
