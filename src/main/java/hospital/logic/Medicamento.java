@@ -34,7 +34,7 @@ public class Medicamento {
         return presentacion;
     }
 
-    public void setCodigo(String ID) {
+    public void setCodigo(String codigo) {
         this.codigo = codigo;
     }
 

@@ -1,5 +1,6 @@
 package hospital.presentacion.medicamentos;
 
+import hospital.logic.Doctor;
 import hospital.logic.Medicamento;
 import hospital.logic.Service;
 
@@ -27,5 +28,15 @@ public class MedicamentosController {
 
     public void loadMedicamentos(){
         model.setMedicamentos(Service.instance().loadListaMedicamentos());
+    }
+
+    public void deleteMedicamento(Medicamento medicamento) throws Exception{
+        Service.instance().deleteMedicamento(medicamento);
+    }
+
+    public void searchMedicamento(String codigo){
+        Medicamento e = new Medicamento();
+        e.setCodigo(codigo);
+        model.setMedicamentos(Service.instance().searchMedicamentoByCode(e));
     }
 }

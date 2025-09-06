@@ -1,5 +1,6 @@
 package hospital.presentacion.medicamentos;
 
+import hospital.logic.Doctor;
 import hospital.logic.Medicamento;
 
 
@@ -19,8 +20,11 @@ public class View3 implements PropertyChangeListener{
     private JButton verListaButton;
     private JButton guardarButton;
     private JButton buscarButton2;
-    private JButton buscarButton;
+    private JButton limpiarButton;
     private JTable table_medicamentos;
+    private JButton borrarButton;
+    private JTextField textField1;
+    private JTextField codigo_buscar_textField;
 
     public JPanel getMedicamentos_JPanel() {
         return medicamentos_JPanel;
@@ -49,6 +53,29 @@ public class View3 implements PropertyChangeListener{
             @Override
             public void actionPerformed(ActionEvent e) {
                 controller.loadMedicamentos();
+            }
+        });
+
+        buscarButton2.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                controller.searchMedicamento(codigo_buscar_textField.getText());
+                codigo_textField.setText("");
+            }
+        });
+
+        borrarButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Medicamento medicamento = new Medicamento();
+                medicamento.setCodigo(codigo_textField.getText());
+                try{
+                    controller.deleteMedicamento(medicamento);
+                    controller.loadMedicamentos();
+                } catch (Exception ex) {
+                    JOptionPane.showMessageDialog(medicamentos_JPanel, "Error al borrar el Doctor " + ex.getMessage());
+                }
+
             }
         });
     }

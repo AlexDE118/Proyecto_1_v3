@@ -2,6 +2,7 @@ package hospital.logic;
 import hospital.data.Listas;
 
 import javax.print.Doc;
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -202,6 +203,27 @@ public class Service {
                                 m.getCodigo().equalsIgnoreCase(medicamento.getCodigo())))
                 .collect(Collectors.toList());
     }
+
+    public void deleteMedicamento(Medicamento medicamento) throws Exception {
+        Medicamento result = listas.getMedicamentos().stream().filter(x -> x.getCodigo().equals(medicamento.getCodigo())).findFirst().orElse(null);
+        if(result != null){
+            listas.getMedicamentos().remove(result);
+        }
+        else {
+            throw new Exception("Medicamento no existente");
+        }
+    }
+
+    public List<Medicamento> searchMedicamentoByCode(Medicamento e) {
+        System.out.println("Buscando: '" + e.getCodigo() + "'");
+        listas.getMedicamentos().forEach(m -> System.out.println("Disponible: '" + m.getCodigo() + "'"));
+
+        return listas.getMedicamentos().stream()
+                .filter(i -> i.getCodigo().trim().equalsIgnoreCase(e.getCodigo().trim()))
+                .findFirst()
+                .map(Collections::singletonList)
+                .orElse(Collections.emptyList());
+    }
     //========================== Receta ==========================//
 
     public void createReceta(Receta receta) {
@@ -252,6 +274,8 @@ public class Service {
             throw new Exception("Prescripcion no existente");
         }
     }
+
+    //======================= DASHBOARD ======================//
 
     //======================= END ======================//
 }

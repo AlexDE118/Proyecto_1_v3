@@ -1,5 +1,6 @@
 package hospital;
 
+import hospital.presentacion.dashboard.View2;
 import hospital.presentacion.doctor.Controller;
 import hospital.presentacion.doctor.Model;
 import hospital.presentacion.doctor.View;
@@ -47,10 +48,13 @@ public class Application {
         hospital.presentacion.prescripcion.Model prescripcionModel = new hospital.presentacion.prescripcion.Model();
         hospital.presentacion.prescripcion.Controller prescripcionController = new hospital.presentacion.prescripcion.Controller(prescripcionView,prescripcionModel);
 
+        //DASHBOARD
+        View2 dashboardView = new  View2();
+
         // ----------- FRAME ----------- //
         JFrame window = new JFrame();
         JTabbedPane tabbedPane = new JTabbedPane();
-        window.setSize(800, 500);
+        window.setSize(1300, 500);
         window.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         window.setTitle("Proyecto_1");
         window.setContentPane(tabbedPane);
@@ -59,12 +63,12 @@ public class Application {
         tabbedPane.addTab("Farmaceutas",farmaceutaView.getFarmaceutaPanel());
         tabbedPane.addTab("Pacientes", pacienteView.getPacientesJPanel());
         tabbedPane.addTab("Prescripcion", prescripcionView.getPrescripcionJPanel());
-        tabbedPane.addTab("Dashboard",null);
+        tabbedPane.addTab("Dashboard", dashboardView.getDashboard_JPanel());
         tabbedPane.addTab("Historico",null);
         tabbedPane.addTab("Acerca de", null);
         // -----
         controllerDoctor.loadDoctors();
-        medicamentosController.loadMedicamentos();
+//        medicamentosController.loadMedicamentos();
         controllerFarmaceuta.loadFarmaceutas();
         pacienteController.loadPacientes();
         //System.out.println();
