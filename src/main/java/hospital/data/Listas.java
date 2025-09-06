@@ -20,9 +20,9 @@ public class Listas {
         doctores.add(new Doctor("CCC","DOC-333","ESPECIALIAD - C","123"));
 
         this.pacientes = new ArrayList<Paciente>();
-        pacientes.add(new Paciente("AAA","PAC-111","111-222"));
-        pacientes.add(new Paciente("BBB","PAC-222","222-333"));
-        pacientes.add(new Paciente("CCC","PAC-333","333-444"));
+        pacientes.add(new Paciente("AAA","PAC-111","FECHA-1","111-222"));
+        pacientes.add(new Paciente("BBB","PAC-222", "FEHCA-2","222-333"));
+        pacientes.add(new Paciente("CCC","PAC-333", "FECHA-3","333-444"));
 
         this.medicamentos = new ArrayList<Medicamento>();
         medicamentos.add(new Medicamento("M-001", "Acetaminofén", "Analgésico usado para aliviar el dolor leve."));

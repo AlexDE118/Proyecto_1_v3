@@ -1,22 +1,23 @@
 package hospital.logic;
 
+
 public class Paciente extends Persona {//aa
 
     //Attritubtos
 
-    //private Fecha fechaNacimiento;
+    private String fechaNacimiento;
     private String numeroTelefono;
 
     //Constructores
 
     public Paciente() {
         super("","");
-    //    this.fechaNacimiento = new Fecha();
+        this.fechaNacimiento = "";
         this.numeroTelefono = "0000-0000";
     }
-    public Paciente(String nombre, String id, String numeroTelefono) {
+    public Paciente(String nombre, String id, String fechaNacimiento, String numeroTelefono) {
         super(nombre, id);
-    //    this.fechaNacimiento = fechaNacimiento;
+        this.fechaNacimiento = fechaNacimiento;
         this.numeroTelefono = numeroTelefono;
     }
 
