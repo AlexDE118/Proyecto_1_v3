@@ -1,16 +1,13 @@
 package hospital.presentacion.prescripcion.pacientes;
 
-import hospital.logic.Paciente;
-import hospital.presentacion.paciente.Model;
-import hospital.presentacion.paciente.Controller;
-
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
+
+import hospital.presentacion.prescripcion.Model;
+import hospital.presentacion.prescripcion.Controller;
 
 public class View extends JDialog implements PropertyChangeListener {
     private JPanel contentPanePacientes;
@@ -18,7 +15,8 @@ public class View extends JDialog implements PropertyChangeListener {
     private JButton cancelButton;
     private JTextField nombre_textField;
     private JButton buscarButton;
-    private JTable table1;
+    private JTable pacientesTable;
+    private JComboBox comboBox1;
 
     public View(){
         setContentPane(contentPanePacientes);
@@ -31,15 +29,58 @@ public class View extends JDialog implements PropertyChangeListener {
         buscarButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                String searchMode = comboBox1.getSelectedItem().toString();
+                if(searchMode.equals("Nombre")){
+                    System.out.println("ComboBox NOMBRE");
+                    controller.searchPacientes(nombre_textField.getText());
+                } else if(searchMode.equals("ID")){
+                    System.out.println("ComboBox ID");
+                    controller.searchPacientes(nombre_textField.getText());
+                }
+            }
+        });
 
+        OKButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                    if(pacientesTable.getSelectedRow()>=0){
+                        controller.setPaciente(pacientesTable.getSelectedRow());
+                    }
+            }
+        });
+
+        cancelButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                View.this.setVisible(false);
             }
         });
 
         //END OF VIEW
     }
 
+    // ---- MVC ---- //
+
+    Controller controller;
+    Model model;
+
+    public void setController(Controller controller) {
+        this.controller = controller;
+    }
+
+    public void setModel(Model model) {
+        this.model = model;
+        model.addPropertyChangeListener(this);
+    }
+
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
-
+        switch (evt.getPropertyName()) {
+            case Model.PACIENTS:
+                int[] cols = {hospital.presentacion.prescripcion.pacientes.TableModel.id,
+                        hospital.presentacion.prescripcion.pacientes.TableModel.NOMBRE, hospital.presentacion.prescripcion.pacientes.TableModel.TELEFONO };
+                pacientesTable.setModel(new TableModel(cols,model.getPacientes()));
+                break;
+        }
     }
 }

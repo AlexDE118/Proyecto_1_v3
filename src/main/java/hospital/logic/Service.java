@@ -113,10 +113,15 @@ public class Service {
 
     public List<Paciente> searchPaciente(Paciente paciente) {
         return listas.getPacientes().stream()
-                .filter(f -> (paciente.getNombre() == null || paciente.getNombre().isEmpty() ||
-                        f.getNombre().toLowerCase().contains(paciente.getNombre().toLowerCase())) &&
-                        (paciente.getId() == null || paciente.getId().isEmpty() ||
-                                f.getId().equalsIgnoreCase(paciente.getId())))
+                .filter(i -> i.getNombre().toLowerCase().contains(paciente.getNombre().toLowerCase()))
+                .sorted(Comparator.comparing(Paciente::getNombre))
+                .collect(Collectors.toList());
+    }
+
+    public List<Paciente> searchPacienteID(Paciente paciente) {
+        return listas.getPacientes().stream()
+                .filter(i -> i.getNombre().toLowerCase().contains(paciente.getId().toLowerCase()))
+                .sorted(Comparator.comparing(Paciente::getId))
                 .collect(Collectors.toList());
     }
 
