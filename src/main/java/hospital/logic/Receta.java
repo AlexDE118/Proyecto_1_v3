@@ -1,17 +1,22 @@
 package hospital.logic;
 
+import java.time.LocalDate;
+
 public class Receta {
     Medicamento medicamentos;
     int cantidad;
     int duracion;
     String indicaciones;
-//  Fecha va aqui
+
+
 
     public Receta(){
         medicamentos = new Medicamento();
         cantidad = 0;
         duracion = 0;
         indicaciones = "";
+
+
     }
 
     public Receta(Medicamento medicamento, int cantidad, int duracion, String indicaciones){
@@ -19,6 +24,8 @@ public class Receta {
         this.cantidad = cantidad;
         this.duracion = duracion;
         this.indicaciones = indicaciones;
+
+
     }
 
     public Medicamento getMedicamentos(){
@@ -50,5 +57,7 @@ public class Receta {
     public void setIndicaciones(String indicaciones){
         this.indicaciones = indicaciones;
     }
+
+
 
 }

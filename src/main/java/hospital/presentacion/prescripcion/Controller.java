@@ -3,6 +3,7 @@ package hospital.presentacion.prescripcion;
 import hospital.logic.Paciente;
 import hospital.logic.Prescripcion;
 import hospital.logic.Service;
+import hospital.logic.Medicamento;
 
 import java.util.List;
 
@@ -30,8 +31,10 @@ public class Controller {
     }
 
     public void clear(){
-        model.setCurrent(new  Prescripcion());
+        model.setCurrent(new Prescripcion());
     }
+
+    //Pacientes
 
     public void setPaciente(int row){
         model.setPaciente(model.getPacientes().get(row));
@@ -41,5 +44,29 @@ public class Controller {
         Paciente paciente = new Paciente();
         paciente.setNombre(nombre);
         model.setPacientes(Service.instance().searchPaciente(paciente));
+    }
+
+    public void searchPacientesid(String id){
+        Paciente paciente = new Paciente();
+        paciente.setId(id);
+        model.setPacientes(Service.instance().searchPacienteID(paciente));
+    }
+
+    //Medicamentos
+
+    public void searchMedicamentoNombre(String nombre){
+        Medicamento medicamento = new Medicamento();
+        medicamento.setNombre(nombre);
+        model.setMedicamentos(Service.instance().searchMedicamentoNombre(medicamento));
+    }
+
+    public void searchMedicamentoID(String codigo){
+        Medicamento medicamento = new Medicamento();
+        medicamento.setCodigo(codigo);
+        model.setMedicamentos(Service.instance().searchMedicamentoByCode(medicamento));
+    }
+
+    public void loadRecetas(){
+        model.setRecetas(Service.instance().loadListaRecetas());
     }
 }

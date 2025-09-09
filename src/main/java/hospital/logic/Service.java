@@ -2,6 +2,7 @@ package hospital.logic;
 import hospital.data.Listas;
 
 import javax.print.Doc;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
@@ -229,6 +230,11 @@ public class Service {
                 .map(Collections::singletonList)
                 .orElse(Collections.emptyList());
     }
+    public List<Medicamento> searchMedicamentoNombre(Medicamento medicamento) {
+        return listas.getMedicamentos().stream()
+                .filter(x -> x.getNombre().toLowerCase().contains(medicamento.getNombre().toLowerCase()))
+                .collect(Collectors.toList());
+    }
     //========================== Receta ==========================//
 
     public void createReceta(Receta receta) {
@@ -278,6 +284,28 @@ public class Service {
         } else {
             throw new Exception("Prescripcion no existente");
         }
+    }
+
+    public List<Prescripcion> buscarPrescripciones(String criterio) {
+        List<Prescripcion> resultado = new ArrayList<>();
+        for (Prescripcion p : listas.getPrescripciones()) {
+            if (p.getPaciente().getId().equalsIgnoreCase(criterio) ||
+                    p.getPaciente().getNombre().toLowerCase().contains(criterio.toLowerCase())) {
+                resultado.add(p);
+            }
+        }
+        return resultado;
+    }
+
+    public void actualizarPrescripcion(Prescripcion prescripcion) {
+        for (int i = 0; i < listas.getPrescripciones().size(); i++) {
+            if (listas.getPrescripciones().get(i).getReceta().equals(prescripcion.getReceta())) {
+                listas.getPrescripciones().set(i, prescripcion);
+                return;
+            }
+        }
+
+        throw new RuntimeException("Prescripción no encontrada: " + prescripcion.getReceta());
     }
 
     //======================= DASHBOARD ======================//

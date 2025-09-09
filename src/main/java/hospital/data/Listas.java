@@ -2,7 +2,9 @@ package hospital.data;
 
 import hospital.logic.*;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 public class Listas {
@@ -39,6 +41,7 @@ public class Listas {
         recetas.add(new Receta(new Medicamento("REC-222","CCC","3"), 1,11,"GG HH II"));
 
         this.prescripciones = new ArrayList<Prescripcion>();
+        prescripciones.add(new Prescripcion(pacientes.get(0), recetas, "confeccionada", LocalDate.now(), LocalDate.now().plusDays(5)));
     }
 
     //Setters | Getters

@@ -51,6 +51,12 @@ public class Application {
         //DASHBOARD
         View2 dashboardView = new  View2();
 
+        //DESPACHO
+
+        hospital.presentacion.despacho.View despachoView = new hospital.presentacion.despacho.View();
+        hospital.presentacion.despacho.Model despachoModel = new hospital.presentacion.despacho.Model();
+        hospital.presentacion.despacho.Controller controllerDespacho = new hospital.presentacion.despacho.Controller(despachoModel, despachoView);
+
         // ----------- FRAME ----------- //
         JFrame window = new JFrame();
         JTabbedPane tabbedPane = new JTabbedPane();
@@ -63,12 +69,13 @@ public class Application {
         tabbedPane.addTab("Farmaceutas",farmaceutaView.getFarmaceutaPanel());
         tabbedPane.addTab("Pacientes", pacienteView.getPacientesJPanel());
         tabbedPane.addTab("Prescripcion", prescripcionView.getPrescripcionJPanel());
+        tabbedPane.addTab("Despacho", despachoView.getDespacho_JPanel());
         tabbedPane.addTab("Dashboard", dashboardView.getDashboard_JPanel());
         tabbedPane.addTab("Historico",null);
         tabbedPane.addTab("Acerca de", null);
         // -----
         controllerDoctor.loadDoctors();
-//        medicamentosController.loadMedicamentos();
+        medicamentosController.loadMedicamentos();
         controllerFarmaceuta.loadFarmaceutas();
         pacienteController.loadPacientes();
         //System.out.println();
