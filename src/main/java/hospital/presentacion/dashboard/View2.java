@@ -55,6 +55,9 @@ public class View2 implements java.beans.PropertyChangeListener {
         this.model.addPropertyChangeListener(this);
 
         // llenar combobox con los medicamentos disponibles + "Todos"
+        Listas listas = new Listas();
+
+        
         listas.getMedicamentos().forEach(m -> {
             String nombre = m.getNombre();
             if (((DefaultComboBoxModel<String>) medicamentos_comboBox.getModel()).getIndexOf(nombre) == -1)
