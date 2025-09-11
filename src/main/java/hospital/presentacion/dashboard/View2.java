@@ -55,15 +55,13 @@ public class View2 implements java.beans.PropertyChangeListener {
         this.model.addPropertyChangeListener(this);
 
         // llenar combobox con los medicamentos disponibles + "Todos"
-
-        model.getListaPrescripcion().forEach(p -> {
-            p.getReceta().forEach(r -> {
-                String nombre = r.getMedicamentos().getNombre();
-                if (((DefaultComboBoxModel<String>) medicamentos_comboBox.getModel()).getIndexOf(nombre) == -1) {
-                    medicamentos_comboBox.addItem(nombre);
-                }
-            });
+        listas.getMedicamentos().forEach(m -> {
+            String nombre = m.getNombre();
+            if (((DefaultComboBoxModel<String>) medicamentos_comboBox.getModel()).getIndexOf(nombre) == -1)
+            {medicamentos_comboBox.addItem(nombre);}
         });
+
+        
     }
 
     @Override
