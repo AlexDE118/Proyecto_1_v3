@@ -41,11 +41,15 @@ public class View implements PropertyChangeListener {
                 doctor.setNombre(nombre_textfield.getText());
                 doctor.setEspecialidad(especialidad_textField.getText());
                 doctor.setClave(ID_textfield.getText());
-                try{
+                try {
+                    if (!validate()) {
+                        return;
+                    }
                     controller.createDoctor(doctor);
                     JOptionPane.showMessageDialog(null, "Doctor guardado exitosamente");
                     controller.loadDoctors();
-                } catch(Exception ex){
+
+                } catch (Exception ex) {
                     JOptionPane.showMessageDialog(Medicos_JPanel, "Error al crear el Doctor " + ex.getMessage());
                 }
             }
@@ -127,4 +131,21 @@ public class View implements PropertyChangeListener {
                 break;
         }
     }
+
+    public boolean validate(){
+        if(ID_textfield.getText().isEmpty()){
+            JOptionPane.showMessageDialog(null, "Debe ingresar un ID");
+            return false;
+        }
+        if(nombre_textfield.getText().isEmpty()){
+            JOptionPane.showMessageDialog(null, "Debe ingresar un nombre");
+            return false;
+        }
+        if(especialidad_textField.getText().isEmpty()){
+            JOptionPane.showMessageDialog(null, "Debe ingresar un especialidad");
+            return false;
+        }
+        return true;
+    }
 }
+
