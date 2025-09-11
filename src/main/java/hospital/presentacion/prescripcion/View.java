@@ -39,6 +39,7 @@ public class View implements PropertyChangeListener {
         agregarMedicamentoButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                controller.loadMedicamentos();
                 medicamentosView.setVisible(true);
             }
         });
@@ -95,12 +96,18 @@ public class View implements PropertyChangeListener {
             }
         });
 
-        descartarMedicamentoButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
+        descartarMedicamentoButton.addActionListener(e -> {
+            int row = listaMedicamentos_JTable.getSelectedRow();
+            if (row != -1) {
+                Receta receta = model.getCurrent().getReceta().get(row);
+                Prescripcion prescripcion = model.getCurrent(); // la que se está editando
 
+                controller.removeRecetaFromPrescripcion(prescripcion, receta);
+            } else {
+                JOptionPane.showMessageDialog(prescripcionJPanel, "Seleccione un medicamento para descartar.");
             }
         });
+
 
         buscarPacienteButton.addActionListener(new ActionListener() {
             @Override

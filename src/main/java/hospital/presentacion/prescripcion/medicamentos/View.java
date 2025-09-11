@@ -59,6 +59,7 @@ public class View extends JDialog implements PropertyChangeListener {
                         receta.setIndicaciones(indicaciones_textField.getText());
                         model.getRecetas().add(receta);
                         model.setRecetas(model.getRecetas());
+                        model.getCurrent().setReceta(model.getRecetas());
                         JOptionPane.showMessageDialog(null, "Medicamentos creado con exito");
 
                         View.this.setVisible(false);

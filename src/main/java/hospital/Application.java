@@ -1,5 +1,6 @@
 package hospital;
 
+//import hospital.presentacion.dashboard.ControllerHolder;
 import hospital.presentacion.dashboard.View2;
 import hospital.presentacion.doctor.Controller;
 import hospital.presentacion.doctor.Model;
@@ -49,9 +50,14 @@ public class Application {
         hospital.presentacion.prescripcion.Controller prescripcionController = new hospital.presentacion.prescripcion.Controller(prescripcionView,prescripcionModel);
 
         //DASHBOARD
-        View2 dashboardView = new  View2();
 
-        //DESPACHO
+        hospital.presentacion.dashboard.Model dashboardModel = new hospital.presentacion.dashboard.Model();
+        View2 dashboardView = new  View2();
+        hospital.presentacion.dashboard.Controller dashboardController = new hospital.presentacion.dashboard.Controller(dashboardModel,dashboardView);
+
+
+
+                //DESPACHO
 
         hospital.presentacion.despacho.View despachoView = new hospital.presentacion.despacho.View();
         hospital.presentacion.despacho.Model despachoModel = new hospital.presentacion.despacho.Model();

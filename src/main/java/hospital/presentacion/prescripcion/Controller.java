@@ -1,10 +1,8 @@
 package hospital.presentacion.prescripcion;
 
-import hospital.logic.Paciente;
-import hospital.logic.Prescripcion;
-import hospital.logic.Service;
-import hospital.logic.Medicamento;
+import hospital.logic.*;
 
+import javax.swing.*;
 import java.util.List;
 
 public class Controller {
@@ -69,4 +67,16 @@ public class Controller {
     public void loadRecetas(){
         model.setRecetas(Service.instance().loadListaRecetas());
     }
+
+    public void loadMedicamentos(){ model.setMedicamentos(Service.instance().loadListaMedicamentos()); }
+
+    public void removeRecetaFromPrescripcion(Prescripcion prescripcion, Receta receta) {
+        try {
+            Service.instance().removeRecetaFromPrescripcion(prescripcion, receta);
+            model.setRecetas(prescripcion.getReceta()); // refresca el modelo
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Error al descartar medicamento: " + e.getMessage());
+        }
+    }
+
 }
