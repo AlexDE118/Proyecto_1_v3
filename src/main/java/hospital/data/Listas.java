@@ -70,7 +70,8 @@ public class Listas {
 //        recetas.add(new Receta(new Medicamento("REC-222","CCC","3"), 1,11,"GG HH II"));
 
         this.prescripciones = new ArrayList<Prescripcion>();
-        prescripciones.add(new Prescripcion(new Paciente("Bob","1234","11-Abril","1111-3333"), recetas, "confeccionada", LocalDate.now(), LocalDate.now().plusDays(5)));
+//        prescripciones.add(new Prescripcion(new Paciente("Bob","1234","11-Abril","1111-3333"), recetas, "confeccionada", LocalDate.now(), LocalDate.now().plusDays(5)));
+//        prescripciones.add(new Prescripcion(new Paciente("Alex","1234","11-Abril","1111-3333"), recetas, "confeccionada", LocalDate.now(), LocalDate.now().plusDays(5)));
 
         this.usuarios = new ArrayList<>();
         usuarios.add(new Usuario("ADM-111","123","Admin"));

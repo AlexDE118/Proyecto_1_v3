@@ -63,6 +63,11 @@ public class Application {
         hospital.presentacion.despacho.Model despachoModel = new hospital.presentacion.despacho.Model();
         hospital.presentacion.despacho.Controller controllerDespacho = new hospital.presentacion.despacho.Controller(despachoModel, despachoView);
 
+        //HISTORICO
+        hospital.presentacion.historico.View historicoView = new hospital.presentacion.historico.View();
+        hospital.presentacion.historico.Model historicoModel = new hospital.presentacion.historico.Model();
+        hospital.presentacion.historico.Controller historicoController = new hospital.presentacion.historico.Controller(historicoView,historicoModel);
+
 
         //ACERCA DE
 
@@ -82,7 +87,7 @@ public class Application {
         tabbedPane.addTab("Prescripcion", prescripcionView.getPrescripcionJPanel());
         tabbedPane.addTab("Despacho", despachoView.getDespacho_JPanel());
         tabbedPane.addTab("Dashboard", dashboardView.getDashboard_JPanel());
-        tabbedPane.addTab("Historico",null);
+        tabbedPane.addTab("Historico",historicoView.getHistoricoJPanel());
         tabbedPane.addTab("Acerca de", acercaDeView.getAcercaDeJPanel());
         // -----
         controllerDoctor.loadDoctors();
