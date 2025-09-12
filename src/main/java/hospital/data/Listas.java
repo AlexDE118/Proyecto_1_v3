@@ -74,6 +74,8 @@ public class Listas {
 
         this.usuarios = new ArrayList<>();
         usuarios.add(new Usuario("ADM-111","123","Admin"));
+        usuarios.add(new Usuario("Medico","123","Doctor"));
+        usuarios.add(new Usuario("Farmaceuta","123","Farmaceuta"));
     }
 
     //Setters | Getters

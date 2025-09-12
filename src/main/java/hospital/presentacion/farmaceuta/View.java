@@ -4,6 +4,8 @@ package hospital.presentacion.farmaceuta;
 //import java.beans.PropertyChangeEvent;
 
 import hospital.logic.Farmaceuta;
+import hospital.logic.Service;
+import hospital.logic.Usuario;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -38,12 +40,17 @@ public class View implements PropertyChangeListener {
                 farmaceuta.setId(id_textField.getText());
                 farmaceuta.setNombre(nombre_textField.getText());
                 farmaceuta.setClave(id_textField.getText());
+                Usuario usuario = new Usuario();
+                usuario.setId(idBuscar_textField.getText());
+                usuario.setClave(id_textField.getText());
+                usuario.setUserType(farmaceuta.getClass().getSimpleName());
                 try{
                     if (!validate()) {
                         return;
                     }
 
                     controller.createFarmaceuta(farmaceuta);
+                    Service.instance().addUsuario(usuario);
                     JOptionPane.showMessageDialog(null, "Farmaceuta guardado exitosamente");
                     controller.loadFarmaceutas();
                 }catch(Exception ex){

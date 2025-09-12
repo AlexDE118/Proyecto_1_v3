@@ -1,6 +1,8 @@
 package hospital.presentacion.doctor;
 
 import hospital.logic.Doctor;
+import hospital.logic.Service;
+import hospital.logic.Usuario;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -41,11 +43,16 @@ public class View implements PropertyChangeListener {
                 doctor.setNombre(nombre_textfield.getText());
                 doctor.setEspecialidad(especialidad_textField.getText());
                 doctor.setClave(ID_textfield.getText());
+                Usuario usuario = new Usuario();
+                usuario.setId(ID_textfield.getText());
+                usuario.setClave(ID_textfield.getText());
+                usuario.setUserType(doctor.getClass().getSimpleName());
                 try {
                     if (!validate()) {
                         return;
                     }
                     controller.createDoctor(doctor);
+                    Service.instance().addUsuario(usuario);
                     JOptionPane.showMessageDialog(null, "Doctor guardado exitosamente");
                     controller.loadDoctors();
 
