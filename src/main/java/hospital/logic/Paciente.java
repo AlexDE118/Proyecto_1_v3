@@ -1,10 +1,11 @@
 package hospital.logic;
 
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
 
-public class Paciente extends Persona {//aa
-
+@XmlAccessorType(XmlAccessType.FIELD)
+public class Paciente extends Persona {
     //Attritubtos
-
     private String fechaNacimiento;
     private String numeroTelefono;
 

@@ -1,7 +1,11 @@
 package hospital.logic;
 import hospital.data.Listas;
+import hospital.data.XmlPersister;
+//import hospital.presentacion.dashboard.Controller;
+//import hospital.presentacion.dashboard.ControllerHolder;
 
 import javax.print.Doc;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -19,7 +23,21 @@ public class Service {
         return instance;
     }
 
-    private Service(){ listas = new Listas(); }
+    private Service(){
+        try{
+            listas = XmlPersister.theInstance().load();
+        } catch (Exception e){
+            listas = new Listas();
+        }
+    }
+
+    public void stop(){
+        try{
+            XmlPersister.theInstance().store(listas);
+        } catch (Exception e){
+            System.out.println("Error al cargarwhe los datos" + e.getMessage());
+        }
+    }
 
     //================== DOCTORES ==================//
 
@@ -239,6 +257,11 @@ public class Service {
 
     public void createReceta(Receta receta) {
         listas.getRecetas().add(receta);
+//        Controller dashboard = ControllerHolder.getController();
+//        if (dashboard != null) {
+//            dashboard.refresh();
+//        }
+
     }
 
     public List<Receta>  loadListaRecetas(){
@@ -259,6 +282,10 @@ public class Service {
         } else {
             throw new Exception("Prescripcion existente");
         }
+//        Controller dashboard = ControllerHolder.getController();
+//        if (dashboard != null) {
+//            dashboard.refresh();
+//        }
     }
 
     public Prescripcion readPrescripcion(Prescripcion prescripcion) throws Exception{
@@ -304,12 +331,58 @@ public class Service {
                 return;
             }
         }
+//        Controller dashboard = ControllerHolder.getController();
+//        if (dashboard != null) {
+//            dashboard.refresh();
+//        }
 
         throw new RuntimeException("Prescripción no encontrada: " + prescripcion.getReceta());
     }
 
-    //======================= DASHBOARD ======================//
+    public void removeRecetaFromPrescripcion(Prescripcion prescripcion, Receta receta) throws Exception {
+        if (!prescripcion.getReceta().remove(receta)) {
+            throw new Exception("La receta no existe en esta prescripción");
+        }
+//        Controller dashboard = ControllerHolder.getController();
+//        if (dashboard != null) {
+//            dashboard.refresh();
+//        }
+    }
+//aaasa
 
+
+    //======================= DASHBOARD ======================//
+    public List<Prescripcion> getPrescripciones(LocalDate desde, LocalDate hasta, String medicamento) {
+        listas.getPrescripciones().forEach(p ->
+                System.out.println("Prescripcion: " + p.getPaciente().getNombre() + ", " +
+                        "Fecha: " + p.getFechaRetiro() + ", Recetas: " +
+                        p.getReceta().stream().map(r -> r.getMedicamentos().getNombre()).toList())
+        );
+
+        return listas.getPrescripciones().stream()
+                .filter(p -> !p.getFechaRetiro().isBefore(desde) && !p.getFechaRetiro().isAfter(hasta))
+                .filter(p -> medicamento == null || medicamento.isBlank() || medicamento.equalsIgnoreCase("Todos")
+                        || p.getReceta().stream()  // recorremos la lista de recetas
+                        .anyMatch(r -> r.getMedicamentos().getNombre().equalsIgnoreCase(medicamento)))
+                .collect(Collectors.toList());
+    }
+
+    //======================= USUARIO =======================//
+
+    public List<Usuario> loadListaUsuarios(){
+        return listas.getUsuarios();
+    }
+
+    public void addUsuario(Usuario usuario) {
+        listas.getUsuarios().add(usuario);
+    }
+
+    public Usuario searchUserID(String id) throws Exception {
+        return listas.getUsuarios().stream()
+                .filter(u -> u.getId().equals(id))
+                .findFirst()
+                .orElse(null);
+    }
     //======================= END ======================//
 }
 

@@ -39,6 +39,10 @@ public class View implements PropertyChangeListener {
                 farmaceuta.setNombre(nombre_textField.getText());
                 farmaceuta.setClave(id_textField.getText());
                 try{
+                    if (!validate()) {
+                        return;
+                    }
+
                     controller.createFarmaceuta(farmaceuta);
                     JOptionPane.showMessageDialog(null, "Farmaceuta guardado exitosamente");
                     controller.loadFarmaceutas();
@@ -116,5 +120,18 @@ public class View implements PropertyChangeListener {
                 farmaceutas_Table.updateUI();
                 break;
         }
+    }
+
+    public boolean validate(){
+        if(id_textField.getText().isEmpty()){
+            JOptionPane.showMessageDialog(null, "Debe ingresar un ID");
+            return false;
+        }
+        if(nombre_textField.getText().isEmpty()){
+            JOptionPane.showMessageDialog(null, "Debe ingresar un nombre");
+            return false;
+        }
+
+        return true;
     }
 }

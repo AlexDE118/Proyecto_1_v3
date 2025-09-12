@@ -1,7 +1,7 @@
 package hospital.presentacion.farmaceuta;
 
-import hospital.presentacion.AbstractModel;
 import hospital.logic.Farmaceuta;
+import hospital.presentacion.AbstractModel;
 
 import java.beans.PropertyChangeListener;
 import java.util.ArrayList;

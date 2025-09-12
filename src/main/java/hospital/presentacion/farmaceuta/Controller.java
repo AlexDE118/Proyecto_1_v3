@@ -1,10 +1,9 @@
 package hospital.presentacion.farmaceuta;
 
-import hospital.logic.Service;
 import hospital.logic.Farmaceuta;
+import hospital.logic.Service;
 
 import java.util.List;
-import hospital.logic.Farmaceuta;
 
 public class Controller {
     View view;

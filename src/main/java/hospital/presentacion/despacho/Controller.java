@@ -3,6 +3,7 @@ package hospital.presentacion.despacho;
 import hospital.logic.Prescripcion;
 import hospital.logic.Service;
 
+
 import java.util.List;
 
 public class Controller {
@@ -25,5 +26,6 @@ public class Controller {
         prescripcion.setEstado(nuevoEstado);
         Service.instance().actualizarPrescripcion(prescripcion);
         model.setSeleccionada(prescripcion);
+
     }
 }

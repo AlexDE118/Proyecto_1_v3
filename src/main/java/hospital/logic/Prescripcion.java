@@ -1,11 +1,19 @@
 package hospital.logic;
 
+import jakarta.xml.bind.annotation.*;
+
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+@XmlAccessorType(XmlAccessType.FIELD)
 public class Prescripcion {
+
+    @XmlIDREF
     Paciente paciente;
+    @XmlElementWrapper(name = "recetas")
+    @XmlElement(name = "receta")
+    @XmlIDREF
     List<Receta> receta;
     private String estado; // "confeccionada", "proceso", "lista", "entregada"
     private LocalDate fechaConfeccion;

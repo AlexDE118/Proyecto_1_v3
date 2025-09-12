@@ -1,47 +1,79 @@
 package hospital.data;
 
 import hospital.logic.*;
-
+import jakarta.xml.bind.annotation.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
+
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 public class Listas {
+
+    @XmlElementWrapper(name = "doctores")
+    @XmlElement(name = "doctor")
     List<Doctor> doctores;
+
+    @XmlElementWrapper(name = "pacientes")
+    @XmlElement(name = "paciente")
     List<Paciente> pacientes;
+
+    @XmlElementWrapper(name = "medicamentos")
+    @XmlElement(name = "medicamento")
     List<Medicamento> medicamentos;
+
+    @XmlElementWrapper(name = "farmaceutas")
+    @XmlElement(name = "farmaceuta")
     List<Farmaceuta> farmaceutas;
+
+    @XmlElementWrapper(name = "recetas")
+    @XmlElement(name = "receta")
+//    @XmlTransient
     List<Receta> recetas;
+
+//    @XmlElementWrapper(name = "prescripciones")
+//   @XmlElement(name = "prescripcion")
+    @XmlTransient
     List<Prescripcion> prescripciones;
+
+//    @XmlElementWrapper(name = "usuarios")
+//    @XmlElement(name = "usuario")
+    List<Usuario> usuarios;
+
+
     //Constructores
     public Listas() {
         this.doctores = new ArrayList<Doctor>();
-        doctores.add(new Doctor("AAA","DOC-111","ESPECIALIAD - A","123"));
-        doctores.add(new Doctor("BBB","DOC-222","ESPECIALIAD - B","123"));
-        doctores.add(new Doctor("CCC","DOC-333","ESPECIALIAD - C","123"));
+//        doctores.add(new Doctor("AAA","DOC-111","ESPECIALIAD - A","123"));
+//        doctores.add(new Doctor("BBB","DOC-222","ESPECIALIAD - B","123"));
+//        doctores.add(new Doctor("CCC","DOC-333","ESPECIALIAD - C","123"));
 
         this.pacientes = new ArrayList<Paciente>();
-        pacientes.add(new Paciente("AAA","PAC-111","FECHA-1","111-222"));
-        pacientes.add(new Paciente("BBB","PAC-222", "FEHCA-2","222-333"));
-        pacientes.add(new Paciente("CCC","PAC-333", "FECHA-3","333-444"));
+//        pacientes.add(new Paciente("AAA","PAC-111","FECHA-1","111-222"));
+//        pacientes.add(new Paciente("BBB","PAC-222", "FEHCA-2","222-333"));
+//        pacientes.add(new Paciente("CCC","PAC-333", "FECHA-3","333-444"));
 
         this.medicamentos = new ArrayList<Medicamento>();
-        medicamentos.add(new Medicamento("M-001", "Acetaminofén", "Analgésico usado para aliviar el dolor leve."));
-        medicamentos.add(new Medicamento("M-002", "Amoxilina", "Antibiótico usado para ifecciones bacterianas en vias respiratorias, urinarias y otros tejidos.."));
+//        medicamentos.add(new Medicamento("M-001", "Acetaminofén", "Analgésico usado para aliviar el dolor leve."));
+//        medicamentos.add(new Medicamento("M-002", "Amoxilina", "Antibiótico usado para ifecciones bacterianas en vias respiratorias, urinarias y otros tejidos.."));
 
         this.farmaceutas = new ArrayList<Farmaceuta>();
-        farmaceutas.add(new Farmaceuta("AAA","FAR-111","111-222"));
-        farmaceutas.add(new Farmaceuta("BBB","FAR-222","222-333"));
-        farmaceutas.add(new Farmaceuta("CCC","FAR-333","333-444"));
+//        farmaceutas.add(new Farmaceuta("AAA","FAR-111","111-222"));
+//        farmaceutas.add(new Farmaceuta("BBB","FAR-222","222-333"));
+//        farmaceutas.add(new Farmaceuta("CCC","FAR-333","333-444"));
 
         this.recetas = new ArrayList<>();
-        recetas.add(new Receta(new Medicamento("REC-111","AAA","1"), 1,11,"AA BB CC"));
-        recetas.add(new Receta(new Medicamento("REC-222","BBB","2"), 1,11,"DD EE FF"));
-        recetas.add(new Receta(new Medicamento("REC-222","CCC","3"), 1,11,"GG HH II"));
+//        recetas.add(new Receta(new Medicamento("REC-111","AAA","1"), 1,11,"AA BB CC"));
+//        recetas.add(new Receta(new Medicamento("REC-222","BBB","2"), 1,11,"DD EE FF"));
+//        recetas.add(new Receta(new Medicamento("REC-222","CCC","3"), 1,11,"GG HH II"));
 
         this.prescripciones = new ArrayList<Prescripcion>();
-        prescripciones.add(new Prescripcion(pacientes.get(0), recetas, "confeccionada", LocalDate.now(), LocalDate.now().plusDays(5)));
+        prescripciones.add(new Prescripcion(new Paciente("Bob","1234","11-Abril","1111-3333"), recetas, "confeccionada", LocalDate.now(), LocalDate.now().plusDays(5)));
+
+        this.usuarios = new ArrayList<>();
+        usuarios.add(new Usuario("ADM-111","123","Admin"));
     }
 
     //Setters | Getters
@@ -92,5 +124,13 @@ public class Listas {
 
     public void setPrescripciones(List<Prescripcion> prescripciones) {
         this.prescripciones = prescripciones;
+    }
+
+    public void setUsuarios(List<Usuario> usuarios) {
+        this.usuarios = usuarios;
+    }
+
+    public List<Usuario> getUsuarios() {
+        return usuarios;
     }
 }

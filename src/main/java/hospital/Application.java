@@ -1,5 +1,7 @@
 package hospital;
 
+//import hospital.presentacion.dashboard.ControllerHolder;
+import hospital.logic.Service;
 import hospital.presentacion.dashboard.View2;
 import hospital.presentacion.doctor.Controller;
 import hospital.presentacion.doctor.Model;
@@ -9,6 +11,8 @@ import hospital.presentacion.medicamentos.MedicamentosModel;
 import hospital.presentacion.medicamentos.View3;
 
 import javax.swing.*;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 public class Application {
     public static void main(String[] args) {
@@ -49,9 +53,14 @@ public class Application {
         hospital.presentacion.prescripcion.Controller prescripcionController = new hospital.presentacion.prescripcion.Controller(prescripcionView,prescripcionModel);
 
         //DASHBOARD
-        View2 dashboardView = new  View2();
 
-        //DESPACHO
+        hospital.presentacion.dashboard.Model dashboardModel = new hospital.presentacion.dashboard.Model();
+        View2 dashboardView = new  View2();
+        hospital.presentacion.dashboard.Controller dashboardController = new hospital.presentacion.dashboard.Controller(dashboardModel,dashboardView);
+
+
+
+                //DESPACHO
 
         hospital.presentacion.despacho.View despachoView = new hospital.presentacion.despacho.View();
         hospital.presentacion.despacho.Model despachoModel = new hospital.presentacion.despacho.Model();
@@ -80,6 +89,15 @@ public class Application {
         pacienteController.loadPacientes();
         //System.out.println();
         window.setContentPane(tabbedPane);
+
+        window.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                super.windowClosing(e);
+                Service.instance().stop();
+            }
+        });
+
         window.setVisible(true);
 
     }

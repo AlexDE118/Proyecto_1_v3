@@ -43,6 +43,8 @@ public class View extends Component implements PropertyChangeListener{
                 Prescripcion seleccionada = model.getPrescripciones().get(fila);
                 String nuevoEstado = (String) estado_comboBox.getSelectedItem();
                 controller.actualizarEstado(seleccionada, nuevoEstado);
+                JOptionPane.showMessageDialog(null, "Prescripción procesada con exito");
+
             } else {
                 JOptionPane.showMessageDialog(this, "Seleccione una prescripción primero");
             }
