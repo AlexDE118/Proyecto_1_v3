@@ -74,7 +74,7 @@ public class View implements PropertyChangeListener {
     public void propertyChange(PropertyChangeEvent evt) {
         switch (evt.getPropertyName()) {
             case Model.CURRENT:
-            // N/A
+            // N/A aaa
             break;
             case Model.PRESCRIPCIONES:
             int[] cols = {TableModel.PACIENTE_ID,TableModel.PACIENTE_NOMBRE, TableModel.ESTADO};
