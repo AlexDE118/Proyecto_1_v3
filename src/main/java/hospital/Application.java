@@ -58,13 +58,15 @@ public class Application {
         View2 dashboardView = new  View2();
         hospital.presentacion.dashboard.Controller dashboardController = new hospital.presentacion.dashboard.Controller(dashboardModel,dashboardView);
 
-
-
-                //DESPACHO
-
+        //DESPACHO
         hospital.presentacion.despacho.View despachoView = new hospital.presentacion.despacho.View();
         hospital.presentacion.despacho.Model despachoModel = new hospital.presentacion.despacho.Model();
         hospital.presentacion.despacho.Controller controllerDespacho = new hospital.presentacion.despacho.Controller(despachoModel, despachoView);
+
+
+        //ACERCA DE
+
+        hospital.presentacion.AcercaDe.View acercaDeView = new hospital.presentacion.AcercaDe.View();
 
         // ----------- FRAME ----------- //
         JFrame window = new JFrame();
@@ -81,7 +83,7 @@ public class Application {
         tabbedPane.addTab("Despacho", despachoView.getDespacho_JPanel());
         tabbedPane.addTab("Dashboard", dashboardView.getDashboard_JPanel());
         tabbedPane.addTab("Historico",null);
-        tabbedPane.addTab("Acerca de", null);
+        tabbedPane.addTab("Acerca de", acercaDeView.getAcercaDeJPanel());
         // -----
         controllerDoctor.loadDoctors();
         medicamentosController.loadMedicamentos();
@@ -101,4 +103,13 @@ public class Application {
         window.setVisible(true);
 
     }
+
+
+    private static void doLogin(){
+        hospital.presentacion.login.View loginView = new hospital.presentacion.login.View();
+
+    }
+
 }
+
+

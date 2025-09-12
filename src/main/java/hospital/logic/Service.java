@@ -373,6 +373,15 @@ public class Service {
         return listas.getUsuarios();
     }
 
+    public Usuario readUsuario(Usuario usuario) throws Exception{
+        Usuario result = listas.getUsuarios().stream().filter(x -> x.getId().equals(usuario.getId())).findFirst().orElse(null);
+        if(result != null){
+            return result;
+        }else{
+            throw new Exception("Usuario no existe");
+        }
+    }
+
     public void addUsuario(Usuario usuario) {
         listas.getUsuarios().add(usuario);
     }
