@@ -178,11 +178,14 @@ public class View2 implements java.beans.PropertyChangeListener {
 
                 updatePieChart(prescripciones);
             }
+//            aaa
 
 
 
         }
     }
+
+
 
 }
 
