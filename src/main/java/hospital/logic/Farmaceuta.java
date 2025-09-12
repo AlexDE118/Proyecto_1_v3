@@ -25,6 +25,11 @@ public class Farmaceuta extends Persona {
         this.clave = clave;
     }
 
+    public void setId(String id) {
+        this.id = id;
+    }
+    public void setNombre(String nombre) {}
+
     //Metodos de la clase
 
     public String toString() {

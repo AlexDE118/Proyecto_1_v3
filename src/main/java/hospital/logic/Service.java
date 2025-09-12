@@ -374,6 +374,9 @@ public class Service {
     }
 
     public Usuario readUsuario(Usuario usuario) throws Exception{
+        System.out.println("Buscando usuario con ID: '" + usuario.getId() + "'");
+        listas.getUsuarios().forEach(u -> System.out.println("Usuario disponible: '" + u.getId() + "'"));
+
         Usuario result = listas.getUsuarios().stream().filter(x -> x.getId().equals(usuario.getId())).findFirst().orElse(null);
         if(result != null){
             return result;
@@ -391,6 +394,20 @@ public class Service {
                 .filter(u -> u.getId().equals(id))
                 .findFirst()
                 .orElse(null);
+    }
+
+    public void updateClave(Usuario usuario) throws Exception {
+        Usuario result = listas.getUsuarios().stream()
+                .filter(u -> u.getId().equals(usuario.getId()))
+                .findFirst()
+                .orElse(null);
+
+        if (result != null) {
+            result.setClave(usuario.getClave());
+            stop();
+        } else {
+            throw new Exception("Usuario no encontrado para actualizar clave");
+        }
     }
     //======================= END ======================//
 }

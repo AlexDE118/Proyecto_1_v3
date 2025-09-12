@@ -2,7 +2,8 @@ package hospital.presentacion.login;
 
 import hospital.logic.Service;
 import hospital.logic.Usuario;
-import hospital.presentacion.dashboard.Controller;
+import hospital.presentacion.Sesion;
+
 import hospital.presentacion.dashboard.View2;
 import hospital.presentacion.medicamentos.View3;
 
@@ -20,20 +21,18 @@ public class View implements PropertyChangeListener {
     private JButton logInButton;
     private JButton limpiarButton;
 
-    View2 dashboardView;
-    hospital.presentacion.despacho.View despachosView;
-    hospital.presentacion.doctor.View doctorView;
-    hospital.presentacion.farmaceuta.View farmaceutaView;
-    View3 medicamentosView;
-    hospital.presentacion.paciente.View pacientesView;
-    hospital.presentacion.prescripcion.View prescripcionesView;
+
 
 
     public JPanel getLoginJPanel() {
         return loginJPanel;
     }
 
+    Controller controller;
+    Model model;
+
     public View() {
+
 
         logInButton.addActionListener(new ActionListener() {
             @Override
@@ -44,29 +43,68 @@ public class View implements PropertyChangeListener {
                 try {
                     Service.instance().readUsuario(usuario);
                     model.setCurrent(usuario);
+
                 } catch (Exception ex) {
                     JOptionPane.showMessageDialog(loginJPanel, "Error: " + ex.getMessage());
                 }
             }
         });
 
+
         cambiarClaveButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                String userId = id_textField.getText();
+                if (userId.isEmpty()) {
+                    JOptionPane.showMessageDialog(loginJPanel, "Debe ingresar un ID de usuario primero");
+                    return;
+                }
 
+                String nuevaClave = JOptionPane.showInputDialog(
+                        loginJPanel,
+                        "Ingrese la nueva clave para el usuario " + userId + ":",
+                        "Cambiar Clave",
+                        JOptionPane.PLAIN_MESSAGE
+                );
+
+                if (nuevaClave != null && !nuevaClave.trim().isEmpty()) {
+                    try {
+                        Usuario u = new Usuario();
+                        u.setId(userId);
+                        u.setClave(nuevaClave);
+
+
+                        Service.instance().updateClave(u);
+
+                        JOptionPane.showMessageDialog(loginJPanel, "Clave actualizada con éxito");
+                    } catch (Exception ex) {
+                        JOptionPane.showMessageDialog(loginJPanel, "Error al cambiar clave: " + ex.getMessage());
+                    }
+                } else {
+                    JOptionPane.showMessageDialog(loginJPanel, "La clave no puede estar vacía");
+                }
             }
         });
+
 
         limpiarButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
+                id_textField.setText("");
+                passwordField1.setText("");
+                JOptionPane.showMessageDialog(loginJPanel, "Campos limpiados");
             }
         });
+
     }
 
-    Controller controller;
-    Model model;
+    public JButton getLogInButton() { return logInButton; }
+
+    public JTextField getIdTextField() { return id_textField; }
+
+    public JTextField getPasswordField1() { return passwordField1; }
+
+
 
     @Override
     public void propertyChange(PropertyChangeEvent evt){
@@ -95,20 +133,5 @@ public class View implements PropertyChangeListener {
         return "INVALID";
     }
 
-    public void mostratPantalla(String userType){
-        switch (userType){
-            case "Doctor":
-                //TABBED PANES
-            break;
-            case "Farmaceuta":
-                //TABBED PANES
-                break;
-            case "Admin":
-                //TABBED PANES
-                break;
-            case "INVALID":
 
-                break;
-        }
-    }
 }

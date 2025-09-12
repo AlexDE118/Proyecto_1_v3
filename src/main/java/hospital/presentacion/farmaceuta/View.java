@@ -3,6 +3,7 @@ package hospital.presentacion.farmaceuta;
 //import javax.swing.*;
 //import java.beans.PropertyChangeEvent;
 
+import hospital.logic.Doctor;
 import hospital.logic.Farmaceuta;
 import hospital.logic.Service;
 import hospital.logic.Usuario;
@@ -77,6 +78,14 @@ public class View implements PropertyChangeListener {
         borrarButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                Farmaceuta farmaceuta = new Farmaceuta();
+                farmaceuta.setId(id_textField.getText());
+                try{
+                    controller.deleteFarmaceuta(farmaceuta);
+                    controller.loadFarmaceutas();
+                } catch (Exception ex) {
+                    JOptionPane.showMessageDialog(farmaceutaPanel, "Error al borrar el Doctor " + ex.getMessage());
+                }
 
             }
         });

@@ -32,6 +32,7 @@ public class Controller {
     }
 
     public void deleteFarmaceuta(Farmaceuta farmaceuta) throws Exception{
+        Service.instance().deleteFarmaceuta(farmaceuta);
 
     }
 
