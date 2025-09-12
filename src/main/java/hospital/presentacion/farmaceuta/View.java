@@ -42,7 +42,7 @@ public class View implements PropertyChangeListener {
                 farmaceuta.setNombre(nombre_textField.getText());
                 farmaceuta.setClave(id_textField.getText());
                 Usuario usuario = new Usuario();
-                usuario.setId(idBuscar_textField.getText());
+                usuario.setId(id_textField.getText());
                 usuario.setClave(id_textField.getText());
                 usuario.setUserType(farmaceuta.getClass().getSimpleName());
                 try{
