@@ -1,5 +1,9 @@
 package hospital.logic;
 
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+
+@XmlAccessorType(XmlAccessType.FIELD)
 public class Doctor extends Persona {
     //Atributos
     private String especialidad;

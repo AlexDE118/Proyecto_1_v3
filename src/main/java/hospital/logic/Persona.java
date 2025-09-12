@@ -1,9 +1,16 @@
 package hospital.logic;
 
+
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlID;
+
+@XmlAccessorType(XmlAccessType.FIELD)
 public class Persona {
     //Atributos
-    protected String nombre;
+    @XmlID
     protected String id;
+    protected String nombre;
 
     //Constructorers
     public Persona() {

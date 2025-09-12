@@ -1,5 +1,6 @@
 package hospital.logic;
 import hospital.data.Listas;
+import hospital.data.XmlPersister;
 //import hospital.presentacion.dashboard.Controller;
 //import hospital.presentacion.dashboard.ControllerHolder;
 
@@ -22,7 +23,21 @@ public class Service {
         return instance;
     }
 
-    private Service(){ listas = new Listas(); }
+    private Service(){
+        try{
+            listas = XmlPersister.theInstance().load();
+        } catch (Exception e){
+            listas = new Listas();
+        }
+    }
+
+    public void stop(){
+        try{
+            XmlPersister.theInstance().store(listas);
+        } catch (Exception e){
+            System.out.println("Error al cargarwhe los datos" + e.getMessage());
+        }
+    }
 
     //================== DOCTORES ==================//
 
@@ -352,11 +367,22 @@ public class Service {
                 .collect(Collectors.toList());
     }
 
+    //======================= USUARIO =======================//
 
+    public List<Usuario> loadListaUsuarios(){
+        return listas.getUsuarios();
+    }
 
+    public void addUsuario(Usuario usuario) {
+        listas.getUsuarios().add(usuario);
+    }
 
-
-
+    public Usuario searchUserID(String id) throws Exception {
+        return listas.getUsuarios().stream()
+                .filter(u -> u.getId().equals(id))
+                .findFirst()
+                .orElse(null);
+    }
     //======================= END ======================//
 }
 

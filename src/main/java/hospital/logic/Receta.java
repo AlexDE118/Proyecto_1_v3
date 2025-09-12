@@ -1,8 +1,14 @@
 package hospital.logic;
 
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlIDREF;
+
 import java.time.LocalDate;
 
+@XmlAccessorType(XmlAccessType.FIELD)
 public class Receta {
+    @XmlIDREF
     Medicamento medicamentos;
     int cantidad;
     int duracion;
